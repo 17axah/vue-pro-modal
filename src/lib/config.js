@@ -1,0 +1,16 @@
+export default {
+  transition: 'scale',
+  loadingTransition: 'fade',
+  overlay: true,
+  layout: true,
+  fullscreen: false,
+  persistent: false,
+  scrollLock: true,
+  closeOnOverlay: true,
+  closeOnEscape: true,
+  noPadding: false,
+  noRadius: false,
+  focusableElement: null,
+  zIndex: 1000,
+  import: (name) => import(`@/components/${name}.vue`),
+};
