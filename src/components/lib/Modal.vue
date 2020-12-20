@@ -1,48 +1,51 @@
 <template>
-  <ModalTransition
-    :name="transition"
-    @before-enter="onBeforeOpen"
-    @before-leave="onBeforeClose"
-    @enter="onOpen"
-    @leave="onClose"
-    @after-enter="onAfterOpen"
-    @after-leave="onAfterClose"
-  >
-    <div
-      v-if="value"
-      tabindex="1"
-      class="modal"
-      :class="modalClasses"
-      :style="modalStyles"
-      @keyup.esc.once.stop="onEscape"
+  <Portal :disabled="Boolean($instance)">
+    <ModalTransition
+      :name="transition"
+      @before-enter="onBeforeOpen"
+      @before-leave="onBeforeClose"
+      @enter="onOpen"
+      @leave="onClose"
+      @after-enter="onAfterOpen"
+      @after-leave="onAfterClose"
     >
       <div
-        v-if="overlay"
-        class="modal__overlay"
-        @click.once="clickOnOverlay"
-        @click="persistentClick"
-      />
-
-      <ModalTransition :name="loadingTransition" mode="out-in">
-        <slot v-if="loading" name="loading">
-          <IconLoading class="modal__loading modal-view" />
-        </slot>
-
+        v-if="value"
+        tabindex="1"
+        class="modal"
+        :class="modalClasses"
+        :style="modalStyles"
+        @keyup.esc.once.stop="onEscape"
+      >
         <div
-          v-else
-          ref="container"
-          class="modal__container modal-view"
-          :class="containerClasses"
-          :style="containerStyles"
-        >
-          <slot v-bind="{ close }" />
-        </div>
-      </ModalTransition>
-    </div>
-  </ModalTransition>
+          v-if="overlay"
+          class="modal__overlay"
+          @click.once="clickOnOverlay"
+          @click="persistentClick"
+        />
+
+        <ModalTransition :name="loadingTransition" mode="out-in">
+          <slot v-if="loading" name="loading">
+            <IconLoading class="modal__loading modal-view" />
+          </slot>
+
+          <div
+            v-else
+            ref="container"
+            class="modal__container modal-view"
+            :class="containerClasses"
+            :style="containerStyles"
+          >
+            <slot v-bind="{ close }" />
+          </div>
+        </ModalTransition>
+      </div>
+    </ModalTransition>
+  </Portal>
 </template>
 
 <script>
+import { Portal } from '@linusborg/vue-simple-portal';
 import IconLoading from './icons/Loading.vue';
 import ModalTransition from './ModalTransition.vue';
 
@@ -51,6 +54,7 @@ let modalCounter = 0;
 
 export default {
   components: {
+    Portal,
     ModalTransition,
     IconLoading,
   },
