@@ -61,7 +61,6 @@ export default {
   },
   provide() {
     return {
-      $modalProps: this.$props,
       $close: this.close,
     };
   },
@@ -346,9 +345,13 @@ export default {
     top: 0
     left: 0
     background-color: rgba(0, 0, 0, 0.5)
+    z-index: 5
 
   &__container
+    max-height: 100%
+    overflow: auto
     position: relative
+    z-index: 15
 
     &.layout
       background: #ffffff
@@ -363,7 +366,7 @@ export default {
     color: #ffffff
     width: 24px
     height: 24px
-    z-index: 1
+    z-index: 15
 
   &.fullscreen
     padding: 0
