@@ -233,7 +233,8 @@ export default {
       }
     },
     lockScroll() {
-      const hasScroll = window.innerWidth > document.documentElement.scrollWidth;
+      const { scrollHeight, clientHeight } = document.documentElement;
+      const hasScroll = scrollHeight > clientHeight;
 
       if (hasScroll) {
         const { scrollTop } = document.documentElement;
@@ -319,6 +320,7 @@ export default {
 
 <style lang="sass">
 .body-scroll-lock
+  width: 100%
   overflow-y: scroll
   position: fixed
 </style>
