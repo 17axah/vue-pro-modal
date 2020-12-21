@@ -27,7 +27,7 @@
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },
-  "main": "dist/vue-modal.common.js",
+  "main": "dist/vue-pro-modal.common.js",
   "files": [
     "dist/*",
     "src/lib/*",
