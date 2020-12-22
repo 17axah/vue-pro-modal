@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.2.0",
-    "@linusborg/vue-simple-portal": "^0.1.4",
-    "vue": "^2.6.11"
+    "core-js": "^3.6.5",
+    "portal-vue": "^2.1.7",
+    "vue": "^2.6.11",
+    "vue-router": "^3.4.9"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -25,7 +27,7 @@
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },
-  "main": "dist/vue-modal.common.js",
+  "main": "dist/vue-pro-modal.common.js",
   "files": [
     "dist/*",
     "src/lib/*",

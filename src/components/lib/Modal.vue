@@ -1,5 +1,11 @@
 <template>
-  <Portal :disabled="Boolean($instance)">
+  <component
+    :is="wrapperComponent"
+    :mount-to="mountTo"
+    :style="wrapperStyles"
+    class="modal-portal"
+    append
+  >
     <ModalTransition
       :name="transition"
       @before-enter="onBeforeOpen"
@@ -41,11 +47,11 @@
         </ModalTransition>
       </div>
     </ModalTransition>
-  </Portal>
+  </component>
 </template>
 
 <script>
-import { Portal } from '@linusborg/vue-simple-portal';
+import { MountingPortal } from 'portal-vue';
 import IconLoading from './icons/Loading.vue';
 import ModalTransition from './ModalTransition.vue';
 
@@ -54,7 +60,7 @@ let modalCounter = 0;
 
 export default {
   components: {
-    Portal,
+    MountingPortal,
     ModalTransition,
     IconLoading,
   },
@@ -151,6 +157,12 @@ export default {
         return this.$modal.$config.focusableElement;
       },
     },
+    mountTo: {
+      type: String,
+      default() {
+        return this.$modal.$config.mountTo;
+      },
+    },
     modalClass: {
       type: [Array, String, Object],
     },
@@ -182,6 +194,9 @@ export default {
     };
   },
   computed: {
+    wrapperComponent() {
+      return this.$instance ? 'div' : 'MountingPortal';
+    },
     modalClasses() {
       return [
         this.modalClass,
@@ -190,6 +205,11 @@ export default {
           fullscreen: this.fullscreen,
         },
       ];
+    },
+    wrapperStyles() {
+      return {
+        zIndex: this.zIndex,
+      };
     },
     modalStyles() {
       return {
@@ -329,6 +349,9 @@ export default {
 </style>
 
 <style lang="sass" scoped>
+.modal-portal
+  position: relative
+
 .modal
   padding: 15px
   width: 100vw
