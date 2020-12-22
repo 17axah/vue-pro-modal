@@ -8,6 +8,7 @@
   >
     <ModalTransition
       :name="transition"
+      :appear="appear"
       @before-enter="onBeforeOpen"
       @before-leave="onBeforeClose"
       @enter="onOpen"
@@ -17,6 +18,7 @@
     >
       <div
         v-if="value"
+        ref="modal"
         tabindex="1"
         class="modal"
         :class="modalClasses"
@@ -91,6 +93,12 @@ export default {
       type: String,
       default() {
         return this.$modal.$config.loadingTransition;
+      },
+    },
+    appear: {
+      type: Boolean,
+      default() {
+        return this.$modal.$config.appear;
       },
     },
     overlay: {
@@ -236,8 +244,9 @@ export default {
     },
   },
   methods: {
-    focusModal(element) {
-      const focusableElement = element.querySelector(this.focusableElement) || element;
+    focusModal() {
+      const { modal } = this.$refs;
+      const focusableElement = modal.querySelector(this.focusableElement) || modal;
 
       this.previousFocusElement = document.activeElement;
 
@@ -293,39 +302,39 @@ export default {
         this.close();
       }
     },
-    onBeforeOpen(element) {
+    onBeforeOpen() {
       modalCounter += 1;
 
-      this.$emit('before-open', element);
+      this.$emit('before-open');
     },
-    onBeforeClose(element) {
+    onBeforeClose() {
       modalCounter -= 1;
 
-      this.$emit('before-close', element);
+      this.$emit('before-close');
     },
-    onOpen(element) {
-      this.focusModal(element);
+    onOpen() {
+      this.focusModal();
 
       if (this.scrollLock && modalCounter === 1) {
         this.lockScroll();
       }
 
-      this.$emit('open', element);
+      this.$emit('open');
     },
-    onClose(element) {
+    onClose() {
       this.blurModal();
 
       if (this.scrollLock && !modalCounter) {
         this.unlockScroll();
       }
 
-      this.$emit('close', element);
+      this.$emit('close');
     },
-    onAfterOpen(element) {
-      this.$emit('after-open', element);
+    onAfterOpen() {
+      this.$emit('after-open');
     },
-    onAfterClose(element) {
-      this.$emit('after-close', element);
+    onAfterClose() {
+      this.$emit('after-close');
     },
   },
   created() {

@@ -4,6 +4,7 @@
     v-for="instance in instances"
     :key="instance.id"
     :name="instance.props.transition || transition"
+    appear
     @before-enter="instance.eventBus.$emit('before-open', $event, instance)"
     @before-leave="instance.eventBus.$emit('before-close', $event, instance)"
     @enter="instance.eventBus.$emit('open', $event, instance)"

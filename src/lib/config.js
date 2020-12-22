@@ -1,6 +1,7 @@
 export default {
   transition: 'scale',
   loadingTransition: 'fade',
+  appear: false,
   overlay: true,
   layout: true,
   fullscreen: false,
