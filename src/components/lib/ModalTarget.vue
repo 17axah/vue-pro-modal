@@ -4,13 +4,12 @@
     v-for="instance in instances"
     :key="instance.id"
     :name="instance.props.transition || transition"
-    appear
-    @before-enter="instance.eventBus.$emit('before-open', $event, instance)"
-    @before-leave="instance.eventBus.$emit('before-close', $event, instance)"
-    @enter="instance.eventBus.$emit('open', $event, instance)"
-    @leave="instance.eventBus.$emit('close', $event, instance)"
-    @after-enter="instance.eventBus.$emit('after-open', $event, instance)"
-    @after-leave="instance.eventBus.$emit('after-close', $event, instance)"
+    @before-enter="instance.eventBus.$emit('before-open')"
+    @before-leave="instance.eventBus.$emit('before-close')"
+    @enter="instance.eventBus.$emit('open')"
+    @leave="instance.eventBus.$emit('close')"
+    @after-enter="instance.eventBus.$emit('after-open')"
+    @after-leave="instance.eventBus.$emit('after-close')"
   >
     <ModalProvider :instance="instance" />
   </ModalTransition>
