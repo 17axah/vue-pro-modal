@@ -1,5 +1,11 @@
 <template>
 <div>
+  <div>
+    <a href="#" @click.prevent="content = !content">
+      Add content to scroll the page
+    </a>
+  </div>
+
   <h1>programmatic modals</h1>
 
   <button class="button m-r-10" @click="openDefaultModal">
@@ -25,11 +31,23 @@
   <button class="button m-r-10" @click="openNestedModal">
     nested modal
   </button>
+
+  <Content v-if="content" :rows="20" />
 </div>
 </template>
 
 <script>
+import Content from '@/components/helpers/Content.vue';
+
 export default {
+  components: {
+    Content,
+  },
+  data() {
+    return {
+      content: false,
+    };
+  },
   methods: {
     openDefaultModal() {
       this.$modal.open('modals/Default');

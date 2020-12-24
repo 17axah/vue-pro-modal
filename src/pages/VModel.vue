@@ -1,5 +1,11 @@
 <template>
 <div>
+  <div>
+    <a href="#" @click.prevent="content = !content">
+      Add content to scroll the page
+    </a>
+  </div>
+
   <h1>v-model modals</h1>
 
   <button class="button m-r-10" @click="modals.default = true">
@@ -106,6 +112,8 @@
       </v-modal>
     </v-modal>
   </v-modal>
+
+  <Content v-if="content" :rows="20" />
 </div>
 </template>
 
@@ -118,6 +126,7 @@ export default {
   },
   data() {
     return {
+      content: false,
       loading: false,
       rowsContent: 1,
       modals: {

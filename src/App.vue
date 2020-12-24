@@ -2,7 +2,7 @@
   <div id="app" class="app">
     <header class="header">
       <router-link :to="{ name: 'index' }" class="header__logo">
-        Vue Modal
+        Vue pro modal
       </router-link>
       <div class="header__links">
         <router-link :to="{ name: 'index' }" class="router-link">
@@ -18,15 +18,7 @@
     </header>
 
     <div class="app__content">
-      <div>
-        <a href="#" @click.prevent="content = !content">
-          Add content to scroll the page
-        </a>
-      </div>
-
       <router-view />
-
-      <Content v-if="content" :rows="20" />
     </div>
 
     <v-modal-target />
@@ -34,17 +26,7 @@
 </template>
 
 <script>
-import Content from '@/components/helpers/Content.vue';
-
 export default {
-  components: {
-    Content,
-  },
-  data() {
-    return {
-      content: false,
-    };
-  },
   mounted() {
     window.app = this;
   },
