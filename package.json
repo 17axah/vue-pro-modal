@@ -28,6 +28,7 @@
   "main": "dist/vue-pro-modal.common.js",
   "files": [
     "dist/*",
+    "nuxt/*",
     "src/lib/*",
     "src/components/lib/*",
     "*.json"

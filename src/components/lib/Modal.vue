@@ -3,7 +3,7 @@
     :is="wrapperComponent"
     :mount-to="mountTo"
     :style="wrapperStyles"
-    class="modal-portal"
+    class="modal-wrapper"
     append
   >
     <ModalTransition
@@ -81,6 +81,12 @@ export default {
       type: Boolean,
       default() {
         return Boolean(this.$instance);
+      },
+    },
+    portal: {
+      type: Boolean,
+      default() {
+        return !this.$instance;
       },
     },
     transition: {
@@ -203,7 +209,7 @@ export default {
   },
   computed: {
     wrapperComponent() {
-      return this.$instance ? 'div' : 'MountingPortal';
+      return this.portal ? 'MountingPortal' : 'div';
     },
     modalClasses() {
       return [
@@ -358,7 +364,7 @@ export default {
 </style>
 
 <style lang="sass" scoped>
-.modal-portal
+.modal-wrapper
   position: relative
 
 .modal
