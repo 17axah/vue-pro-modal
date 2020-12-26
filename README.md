@@ -91,7 +91,7 @@ Installing the plugin connects the components globally, and also adds the *$moda
         id: string,
         name: string,
         props: object,
-        listeners: object
+        listeners: object,
         eventBus: object
     }
 ]
