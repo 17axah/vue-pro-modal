@@ -13,6 +13,5 @@ export default {
   noRadius: false,
   focusableElement: null,
   zIndex: 1000,
-  mountTo: 'body',
   import: (name) => import(`@/components/${name}.vue`),
 };

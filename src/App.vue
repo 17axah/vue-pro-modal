@@ -56,6 +56,12 @@ a
   color: #3eaf7c
   text-decoration: none
 
+table
+  width: 100%
+
+  th
+    text-align: left
+
 .router-link
   display: inline-flex
   position: relative

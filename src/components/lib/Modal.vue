@@ -54,6 +54,7 @@
 
 <script>
 import { MountingPortal } from 'portal-vue';
+import config from '@/lib/config';
 import IconLoading from './icons/Loading.vue';
 import ModalTransition from './ModalTransition.vue';
 
@@ -69,6 +70,11 @@ export default {
   inject: {
     $instance: {
       default: null,
+    },
+    $config: {
+      default() {
+        return this.$modal?.$config || config;
+      },
     },
   },
   provide() {
@@ -92,49 +98,49 @@ export default {
     transition: {
       type: String,
       default() {
-        return this.$modal.$config.transition;
+        return this.$config.transition;
       },
     },
     loadingTransition: {
       type: String,
       default() {
-        return this.$modal.$config.loadingTransition;
+        return this.$config.loadingTransition;
       },
     },
     appear: {
       type: Boolean,
       default() {
-        return this.$modal.$config.appear;
+        return this.$config.appear;
       },
     },
     overlay: {
       type: Boolean,
       default() {
-        return this.$modal.$config.overlay;
+        return this.$config.overlay;
       },
     },
     fullscreen: {
       type: Boolean,
       default() {
-        return this.$modal.$config.fullscreen;
+        return this.$config.fullscreen;
       },
     },
     layout: {
       type: Boolean,
       default() {
-        return this.$modal.$config.layout;
+        return this.$config.layout;
       },
     },
     noPadding: {
       type: Boolean,
       default() {
-        return this.$modal.$config.noPadding;
+        return this.$config.noPadding;
       },
     },
     noRadius: {
       type: Boolean,
       default() {
-        return this.$modal.$config.noRadius;
+        return this.$config.noRadius;
       },
     },
     loading: {
@@ -144,38 +150,36 @@ export default {
     persistent: {
       type: Boolean,
       default() {
-        return this.$modal.$config.persistent;
+        return this.$config.persistent;
       },
     },
     scrollLock: {
       type: Boolean,
       default() {
-        return this.$modal.$config.scrollLock;
+        return this.$config.scrollLock;
       },
     },
     closeOnOverlay: {
       type: Boolean,
       default() {
-        return this.$modal.$config.closeOnOverlay;
+        return this.$config.closeOnOverlay;
       },
     },
     closeOnEscape: {
       type: Boolean,
       default() {
-        return this.$modal.$config.closeOnEscape;
+        return this.$config.closeOnEscape;
       },
     },
     focusableElement: {
       type: String,
       default() {
-        return this.$modal.$config.focusableElement;
+        return this.$config.focusableElement;
       },
     },
     mountTo: {
       type: String,
-      default() {
-        return this.$modal.$config.mountTo;
-      },
+      default: 'body',
     },
     modalClass: {
       type: [Array, String, Object],
@@ -198,7 +202,7 @@ export default {
     zIndex: {
       type: [String, Number],
       default() {
-        return this.$modal.$config.zIndex;
+        return this.$config.zIndex;
       },
     },
   },
