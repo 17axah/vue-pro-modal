@@ -29,6 +29,10 @@
     "vue-template-compiler": "^2.6.11"
   },
   "main": "dist/vue-pro-modal.common.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/17axah/vue-pro-modal.git"
+  },
   "files": [
     "dist/*",
     "nuxt/*",
