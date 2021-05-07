@@ -1,6 +1,6 @@
 {
   "name": "vue-pro-modal",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -10,7 +10,8 @@
   "dependencies": {
     "@juggle/resize-observer": "^3.2.0",
     "portal-vue": "^2.1.7",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-body-scroll-lock": "^2.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
