@@ -88,6 +88,7 @@
   </v-modal>
 
   <v-modal v-model="modals.nested">
+    <router-link :to="'/'">index</router-link>
     <Content title="Nested modal 1" />
 
     <v-modal-close />
@@ -97,6 +98,7 @@
     </button>
 
     <v-modal v-model="modals.nested2" width="500px">
+      <router-link :to="'/'">index</router-link>
       <Content title="Nested modal 2" />
 
       <v-modal-close />
@@ -106,6 +108,7 @@
       </button>
 
       <v-modal v-model="modals.nested3">
+        <router-link :to="'/'">index</router-link>
         <v-modal-close />
 
         <Content title="Nested modal 3" />

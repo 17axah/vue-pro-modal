@@ -19,6 +19,7 @@
       <div
         v-if="value"
         ref="modal"
+        v-scroll-lock="[value && scrollLock, { reserveScrollBarGap: scrollLockGap }]"
         tabindex="1"
         class="modal"
         :class="modalClasses"
@@ -55,11 +56,9 @@
 <script>
 import { MountingPortal } from 'portal-vue';
 import config from '@/lib/config';
+import { directive } from 'vue-body-scroll-lock';
 import IconLoading from './icons/Loading.vue';
 import ModalTransition from './ModalTransition.vue';
-
-// eslint-disable-next-line no-unused-vars
-let modalCounter = 0;
 
 export default {
   components: {
@@ -81,6 +80,9 @@ export default {
     return {
       $close: this.close,
     };
+  },
+  directives: {
+    scrollLock: directive,
   },
   props: {
     value: {
@@ -158,6 +160,10 @@ export default {
       default() {
         return this.$config.scrollLock;
       },
+    },
+    scrollLockGap: {
+      type: Boolean,
+      default: true,
     },
     closeOnOverlay: {
       type: Boolean,
@@ -274,25 +280,6 @@ export default {
         this.$emit('input', false);
       }
     },
-    lockScroll() {
-      const { scrollHeight, clientHeight } = document.documentElement;
-      const hasScroll = scrollHeight > clientHeight;
-
-      if (hasScroll) {
-        const { scrollTop } = document.documentElement;
-
-        document.body.classList.add('body-scroll-lock');
-        document.body.style.top = `-${scrollTop}px`;
-      }
-    },
-    unlockScroll() {
-      const scrollTop = Math.abs(parseInt(document.body.style.top, 10));
-
-      document.body.classList.remove('body-scroll-lock');
-      document.body.style.top = '';
-
-      document.documentElement.scrollTop = scrollTop;
-    },
     clickOnOverlay() {
       if (this.closeOnOverlay && !this.persistent) {
         this.close();
@@ -313,30 +300,18 @@ export default {
       }
     },
     onBeforeOpen() {
-      modalCounter += 1;
-
       this.$emit('before-open');
     },
     onBeforeClose() {
-      modalCounter -= 1;
-
       this.$emit('before-close');
     },
     onOpen() {
       this.focusModal();
 
-      if (this.scrollLock && modalCounter === 1) {
-        this.lockScroll();
-      }
-
       this.$emit('open');
     },
     onClose() {
       this.blurModal();
-
-      if (this.scrollLock && !modalCounter) {
-        this.unlockScroll();
-      }
 
       this.$emit('close');
     },
