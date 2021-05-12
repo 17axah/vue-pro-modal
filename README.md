@@ -180,7 +180,7 @@ layout              | boolean            | true      | Display background modal.
 fullscreen          | boolean            | false     | Fullscreen modal.
 persistent          | boolean            | false     | Persistent modal. When you click on the overlay, the modal will twitch.
 scrollLock          | boolean            | true      | Body scroll lock.
-scrollLockGap       | boolean            | true      | Padding body while blocking scrolling
+scrollLockGapMethod | string             | 'none'    | Gap method  while blocking scrolling
 closeOnOverlay      | boolean            | true      | Close modal on click overlay.
 closeOnEscape       | boolean            | true      | Close modal on press ESC key.
 noPadding           | boolean            | false     | Without paddings (.modal__container).

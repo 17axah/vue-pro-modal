@@ -3,7 +3,7 @@
     <header v-if="$scopedSlots.header" ref="header" class="modal-content__header">
       <slot name="header" />
     </header>
-    <div class="modal-content__body" :style="bodyStyles">
+    <div class="modal-content__body" :style="bodyStyles" data-scroll-lock-scrollable>
       <slot name="body" />
     </div>
     <footer v-if="$scopedSlots.footer" ref="footer" class="modal-content__footer">
@@ -18,13 +18,15 @@ import { ResizeObserver } from '@juggle/resize-observer';
 export default {
   data() {
     return {
-      maxHeight: '',
+      modalResizeObserver: null,
+      viewportHeight: '',
+      modalOffset: '',
     };
   },
   computed: {
     bodyStyles() {
       return {
-        maxHeight: `calc(100vh - ${this.maxHeight}px)`,
+        maxHeight: `calc(${this.viewportHeight} - ${this.modalOffset}px)`,
       };
     },
   },
@@ -42,16 +44,36 @@ export default {
       const modalPaddings = content ? this.getPaddings(content.closest('.modal')) : 0;
       const containerPaddings = content ? this.getPaddings(content.closest('.modal__container')) : 0;
 
-      this.maxHeight = footerHeight + headerHeight + modalPaddings + containerPaddings;
+      this.modalOffset = footerHeight + headerHeight + modalPaddings + containerPaddings;
+    },
+    onViewportResize() {
+      this.viewportHeight = `${window.innerHeight}px`;
     },
     resizeObserve() {
-      const observer = new ResizeObserver(this.onResize);
+      this.modalResizeObserver = new ResizeObserver(this.onResize);
 
-      observer.observe(this.$refs.content);
+      this.modalResizeObserver.observe(this.$refs.content);
     },
+    resizeUnobserve() {
+      this.modalResizeObserver.unobserve(this.$refs.content);
+    },
+    viewportResizeObserve() {
+      window.addEventListener('resize', this.onViewportResize);
+      this.onViewportResize();
+    },
+    viewportResizeUnobserve() {
+      window.removeEventListener('resize', this.onViewportResize);
+    },
+  },
+  created() {
+    this.viewportResizeObserve();
   },
   mounted() {
     this.resizeObserve();
+  },
+  beforeDestroy() {
+    this.resizeUnobserve();
+    this.viewportResizeUnobserve();
   },
 };
 </script>

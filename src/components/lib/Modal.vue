@@ -19,7 +19,7 @@
       <div
         v-if="value"
         ref="modal"
-        v-scroll-lock="[value && scrollLock, { reserveScrollBarGap: scrollLockGap }]"
+        v-scroll-lock:[scrollLockGapMethod]="value && scrollLock"
         tabindex="1"
         class="modal"
         :class="modalClasses"
@@ -40,6 +40,7 @@
 
           <div
             v-else
+            data-scroll-lock-scrollable
             ref="container"
             class="modal__container modal-view"
             :class="containerClasses"
@@ -161,9 +162,9 @@ export default {
         return this.$config.scrollLock;
       },
     },
-    scrollLockGap: {
-      type: Boolean,
-      default: true,
+    scrollLockGapMethod: {
+      type: String,
+      default: 'none',
     },
     closeOnOverlay: {
       type: Boolean,
@@ -349,7 +350,7 @@ export default {
 .modal
   padding: 15px
   width: 100vw
-  height: 100vh
+  height: 100%
   display: flex
   align-items: center
   justify-content: center
