@@ -19,7 +19,7 @@
       <div
         v-if="value"
         ref="modal"
-        v-scroll-lock:[scrollLockGapMethod]="value && scrollLock"
+        v-scroll-lock:[scrollLockGapMethod]="isScrollLock"
         tabindex="1"
         class="modal"
         :class="modalClasses"
@@ -27,7 +27,7 @@
         @keyup.esc.once.stop="onEscape"
       >
         <div
-          v-if="overlay"
+          v-if="showOverlay"
           class="modal__overlay"
           @click.once="clickOnOverlay"
           @click="persistentClick"
@@ -212,6 +212,10 @@ export default {
         return this.$config.zIndex;
       },
     },
+    minimize: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -219,6 +223,12 @@ export default {
     };
   },
   computed: {
+    showOverlay() {
+      return this.overlay && !this.minimize;
+    },
+    isScrollLock() {
+      return this.value && this.scrollLock && !this.minimize;
+    },
     wrapperComponent() {
       return this.portal ? 'MountingPortal' : 'div';
     },
@@ -226,6 +236,7 @@ export default {
       return [
         this.modalClass,
         {
+          minimize: this.minimize,
           loading: this.loading,
           fullscreen: this.fullscreen,
         },
@@ -349,7 +360,7 @@ export default {
 
 .modal
   padding: 15px
-  width: 100vw
+  width: 100%
   height: 100%
   display: flex
   align-items: center
@@ -396,6 +407,20 @@ export default {
     .modal__container
       width: 100%
       height: 100%
+
+  &.minimize
+    padding: 0
+    top: auto
+    left: auto
+    bottom: 0
+    right: 36px
+    width: 240px
+    height: 180px
+
+    .modal__container
+      width: 100%
+      height: 100%
+      box-shadow: 0px 2px 8px rgba(51, 51, 51, 0.25)
 
   .persistent-animate
     animation: persistent 0.2s

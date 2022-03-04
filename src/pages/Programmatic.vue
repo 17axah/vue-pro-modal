@@ -32,6 +32,10 @@
     nested modal
   </button>
 
+  <button class="button m-r-10" @click="openMinimizeModal">
+    minimize modal
+  </button>
+
   <Content v-if="content" :rows="20" />
 </div>
 </template>
@@ -66,6 +70,9 @@ export default {
     },
     openNestedModal() {
       this.$modal.open('modals/Nested');
+    },
+    openMinimizeModal() {
+      this.$modal.open('modals/Minimize');
     },
   },
 };
