@@ -5,6 +5,7 @@ export default {
   overlay: true,
   layout: true,
   fullscreen: false,
+  minimize: false,
   persistent: false,
   scrollLock: true,
   closeOnOverlay: true,

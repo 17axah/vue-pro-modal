@@ -1,9 +1,13 @@
 <template>
-  <v-modal :minimize="minimize" v-slot="{ close }">
+  <v-modal :minimize.sync="minimize" :fullscreen.sync="fullscreen" v-slot="{ close }">
     <Content title="Minimize programmatic modal" />
 
     <button class="button" type="button" @click="minimize = !minimize">
       minimize
+    </button>
+
+    <button class="button" type="button" @click="fullscreen = !fullscreen">
+      fullscreen
     </button>
 
     <button class="button" type="button" @click="close">
@@ -22,6 +26,7 @@ export default {
   data() {
     return {
       minimize: false,
+      fullscreen: false,
     };
   },
 };

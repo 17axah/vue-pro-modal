@@ -128,6 +128,12 @@ export default {
         return this.$config.fullscreen;
       },
     },
+    minimize: {
+      type: Boolean,
+      default() {
+        return this.$config.minimize;
+      },
+    },
     layout: {
       type: Boolean,
       default() {
@@ -212,14 +218,12 @@ export default {
         return this.$config.zIndex;
       },
     },
-    minimize: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
       previousFocusElement: null,
+      minimizeBeforeFullscreen: this.minimize,
+      fullscreenBeforeMinimize: this.fullscreen,
     };
   },
   computed: {
@@ -269,6 +273,26 @@ export default {
         height: this.height,
         maxHeight: this.maxHeight,
       };
+    },
+  },
+  watch: {
+    minimize(value) {
+      if (value) {
+        this.fullscreenBeforeMinimize = this.fullscreen;
+
+        this.$emit('update:fullscreen', false);
+      } else if (this.fullscreenBeforeMinimize) {
+        this.$emit('update:fullscreen', true);
+      }
+    },
+    fullscreen(value) {
+      if (value) {
+        this.minimizeBeforeFullscreen = this.minimize;
+
+        this.$emit('update:minimize', false);
+      } else if (this.minimizeBeforeFullscreen) {
+        this.$emit('update:minimize', true);
+      }
     },
   },
   methods: {
