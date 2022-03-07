@@ -444,7 +444,6 @@ export default {
     .modal__container
       width: 100%
       height: 100%
-      box-shadow: 0px 2px 8px rgba(51, 51, 51, 0.25)
 
   .persistent-animate
     animation: persistent 0.2s
