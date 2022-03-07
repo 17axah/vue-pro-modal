@@ -405,8 +405,8 @@ export default {
     padding: 0
 
     .modal__container
-      width: 100%
-      height: 100%
+      width: 100% !important
+      height: 100% !important
 
   &.minimize
     padding: 0
