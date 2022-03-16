@@ -14,7 +14,6 @@ export default (ctx, inject) => {
   const options = {
     ...defaults,
     ...<%= serialize(options) %>,
-    import: (name) => import(`@/components/${name}.vue`),
   };
 
   const propertyName = '$modal';
