@@ -57,8 +57,8 @@
 
 <script>
 import { MountingPortal } from 'portal-vue';
-import config from '@/lib/config';
 import { directive } from 'vue-body-scroll-lock';
+import config from '../../lib/config';
 import IconLoading from './icons/Loading.vue';
 import ModalTransition from './ModalTransition.vue';
 
