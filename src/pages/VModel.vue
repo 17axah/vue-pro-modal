@@ -32,7 +32,7 @@
     nested modal
   </button>
 
-  <v-modal v-model="modals.default">
+  <v-modal v-model="modals.default" scrollLockGapMethod="padding">
     <Content title="Default modal" />
   </v-modal>
 

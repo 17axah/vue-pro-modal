@@ -20,6 +20,7 @@
         v-if="value"
         ref="modal"
         v-scroll-lock:[scrollLockGapMethod]="isScrollLock"
+        data-scroll-lock-fill-gap
         tabindex="1"
         class="modal"
         :class="modalClasses"
